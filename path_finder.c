@@ -23,7 +23,9 @@ char *find_path(char *command)
 		dir = opendir(dirs[i]);
 		full_path = _strcat(dirs[i], _strcat("/", command));
 		if (stat(full_path, &st) != 0)
+		{
 			full_path = NULL;
+		}
 		else
 		{
 			closedir(dir);

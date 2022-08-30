@@ -23,7 +23,9 @@ int execute(char **argv)
 
 	child_pid = fork();
 	if (child_pid == -1)
+	{
 		return (0);
+	}
 	if (child_pid == 0)
 	{
 		if (execve(argv[0], argv, NULL) == -1)
@@ -33,13 +35,13 @@ int execute(char **argv)
 		}
 		else
 		{
+			free(argv[0]);
 			return (1);
 		}
 	}
 	else
 	{
 		wait(&status);
-		free(argv[0]);
 		return (0);
 	}
 }

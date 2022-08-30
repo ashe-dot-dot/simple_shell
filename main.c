@@ -37,7 +37,6 @@ int main(int ac, char **av)
 
 		argv = split(line);
 		execute(argv);
-
 		free(argv);
 	}
 
