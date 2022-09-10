@@ -11,7 +11,7 @@
 int main(int ac, char **av)
 {
 	ssize_t nread;
-	char *line, **argv;
+	char *line = NULL, **argv;
 	size_t len;
 
 	(void)av;
@@ -20,7 +20,10 @@ int main(int ac, char **av)
 
 	while (1)
 	{
-		write(1, "#cisfun$ ", 9);
+		if (isatty(STDIN_FILENO) == 1)
+		{
+			write(1, "#cisfun$ ", 9);
+		}
 		nread = getline(&line, &len, stdin);
 		if (nread == -1)
 			break;
@@ -40,5 +43,6 @@ int main(int ac, char **av)
 		free(argv);
 	}
 
+	free(line);
 	return (0);
 }
